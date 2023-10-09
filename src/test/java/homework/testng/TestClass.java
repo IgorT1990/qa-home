@@ -1,15 +1,19 @@
-package ua.ithillel.testng;
+package homework.testng;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.util.List;
+
 public class TestClass {
-WebDriver driver;
+    private WebDriver driver;
+
     @BeforeTest
     public void setUp(){
         driver = new ChromeDriver();
@@ -45,7 +49,7 @@ WebDriver driver;
 
     @AfterTest
     public void Close(){
-     driver.quit();
+        driver.quit();
     }
 }
 

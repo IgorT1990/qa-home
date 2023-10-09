@@ -4,7 +4,7 @@
 <suite name = "Testng tests" >
     <test name = "Testng tests">
         <classes>
-        <class name = "ua.ithillel.testng.TestClass"/>
+         <class name = "homework.testng.TestClass"/>
         </classes>
     </test>
 </suite>
