@@ -1,4 +1,4 @@
-package classwork.lesson15_cockie_windows;
+package classwork.lesson16_waits;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -9,9 +9,8 @@ import org.testng.annotations.BeforeClass;
 import java.time.Duration;
 
 public class BaseTestClass {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
+     WebDriver driver;
+     WebDriverWait wait;
 
     @BeforeClass
     public void beforeClass(){
@@ -23,8 +22,9 @@ public class BaseTestClass {
     @AfterClass
     public void afterClass(){
         if (driver != null){
-            driver.quit();
+  //          driver.quit();
         }
     }
 
 }
+

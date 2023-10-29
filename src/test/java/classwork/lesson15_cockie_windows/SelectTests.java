@@ -23,5 +23,7 @@ public class SelectTests extends BaseTestClass {
         selector.selectByValue("1");
         Assert.assertEquals(selector.getFirstSelectedOption().getText(), "Option 1");
         Thread.sleep(3000);
+
+
     }
 }
