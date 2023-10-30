@@ -1,5 +1,6 @@
-package classwork.lesson17_setting_browser;
+package classwork.lesson18_config_provider;
 
+import classwork.lesson17_setting_browser.BaseTestClass;
 import lesson17_setting_browser.utils.ConfigProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

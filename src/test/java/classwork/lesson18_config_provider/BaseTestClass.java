@@ -1,4 +1,4 @@
-package classwork.lesson17_setting_browser;
+package classwork.lesson18_config_provider;
 
 import lesson17_setting_browser.driver.WebDriverFactory3;
 import org.openqa.selenium.WebDriver;

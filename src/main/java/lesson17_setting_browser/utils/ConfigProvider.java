@@ -1,26 +1,34 @@
 package lesson17_setting_browser.utils;
-import java.util.Properties;
+
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 public final class ConfigProvider {
 
-    private static final String CONFIG_PATH = "config.properties";
-    private static final Properties prop = initProperties();
-    public static final String BROWSER = prop.getProperty("browser");
-    public static final String BASE_URL = prop.getProperty("base.url");
+    private static ConfigProvider instance;
+    private Properties properties;
 
-    private ConfigProvider() {
-
+    ConfigProvider(){
+        properties = new Properties();
+        try {
+            properties.load(new FileInputStream(new File("src/main/resources/config.properties")));
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
     }
 
-    private static Properties initProperties() {
-        Properties properties = new Properties();
-        try {
-            properties.load(ClassLoader.getSystemResourceAsStream(CONFIG_PATH));
-        } catch (IOException e) {
-            throw new RuntimeException("Could not load properties: " + CONFIG_PATH);
+    public static ConfigProvider getInstance(){
+        if (instance == null){
+            instance = new ConfigProvider();
         }
-        return properties;
+        return instance;
+    }
+
+    public String getProperty(String name){
+        return properties.getProperty(name);
     }
 
 
