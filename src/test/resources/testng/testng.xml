@@ -4,7 +4,8 @@
 <suite name = "Testng tests" >
     <test name = "Testng tests">
         <classes>
-         <class name = "classwork.lesson17_setting_browser.WaitersTests"/>
+         <class name = "classwork.lesson12.LoginTests"/>
+            <class name = "classwork.lesson12.AlertsTests"/>
         </classes>
     </test>
 </suite>
