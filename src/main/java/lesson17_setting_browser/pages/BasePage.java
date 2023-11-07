@@ -8,4 +8,8 @@ public class BasePage {
     public BasePage(){
         PageFactory.initElements(WebDriverHolder.getInstance().getDriver(), this);
     }
+
+    public void sleep(long msec) throws InterruptedException{
+        Thread.sleep(msec);
+    }
 }
