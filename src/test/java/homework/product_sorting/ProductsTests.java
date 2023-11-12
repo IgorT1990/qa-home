@@ -14,7 +14,7 @@ import java.util.List;
 public class ProductsTests extends BaseTestListProduct {
 
     @BeforeClass
-    public void beforeClass(){
+    public void beforeClass() {
         goToPart("8-dresses");
     }
 
@@ -31,9 +31,9 @@ public class ProductsTests extends BaseTestListProduct {
         List<Products> productsAsIs = productPageShop.getProducts();
 
         List<Products> productsAfterSorting = productPageShop.sortBy(SortDirection.PRICE_LOW_TO_HIGH).getProducts();
-        Collections.sort(productsAsIs, new Comparator<Products>(){
+        Collections.sort(productsAsIs, new Comparator<Products>() {
             @Override
-            public int compare(Products o1, Products o2){
+            public int compare(Products o1, Products o2) {
                 return o1.getPrice().compareTo(o2.getPrice());
             }
         });

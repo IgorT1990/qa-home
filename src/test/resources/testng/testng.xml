@@ -1,11 +1,11 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testing.org/testng-1.0.dtd">
 
-<suite name = "Testng tests" >
-    <test name = "Testng tests">
+<suite name="Testng tests">
+    <test name="Testng tests">
         <classes>
-         <class name = "classwork.lesson12.LoginTests"/>
-            <class name = "classwork.lesson12.AlertsTests"/>
+            <class name="classwork.lesson12.LoginTests"/>
+            <class name="classwork.lesson12.AlertsTests"/>
         </classes>
     </test>
 </suite>
