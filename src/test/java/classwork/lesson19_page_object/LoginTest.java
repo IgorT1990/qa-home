@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
         MainPage mainPage = new LoginPage()
                 .login(userName, userPassword);
 
-        Assert.assertEquals(mainPage.getSuccessfulMessage().trim(), "Welcome to the Secure Area. When you are done click logout below.");
+        Assert.assertEquals(mainPage.getSuccessMessageText().trim(), "Welcome to the Secure Area. When you are done click logout below.");
     }
 
     @Test
@@ -30,6 +30,6 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage()
                 .unsuccessfulLogin(userName, userPassword + "1");
 
-        Assert.assertEquals(loginPage.getErrorMessage().trim(), "Your password is invalid!\n" + "×");
+        Assert.assertEquals(loginPage.getErrorMessageText().trim(), "Your password is invalid!\n" + "×");
     }
 }

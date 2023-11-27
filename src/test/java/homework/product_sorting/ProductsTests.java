@@ -53,4 +53,31 @@ public class ProductsTests extends BaseTestListProduct {
 
         Assert.assertEquals(productAsIs, productsAfterSorting);
     }
+
+
+    @Test
+    public void sortByNameAscendingTest() throws InterruptedException {
+        ProductPageShop productPageShop = new ProductPageShop().sortByAmount(SortDirection.ITEM_AMOUNT);
+        List<Products> productsAsIs = productPageShop.getProducts();
+
+        List<Products> productsAfterSorting = productPageShop.sortBy(SortDirection.NAME_A_TO_Z).getProducts();
+
+        Collections.sort(productsAsIs, Comparator.comparing(Products::getName));
+
+        Assert.assertEquals(productsAsIs, productsAfterSorting);
+    }
+
+    @Test
+    public void sortByNameDescendingTest() throws InterruptedException {
+        ProductPageShop productPageShop = new ProductPageShop().sortByAmount(SortDirection.ITEM_AMOUNT);
+        List<Products> productsAsIs = productPageShop.getProducts();
+
+        List<Products> productsAfterSorting = productPageShop.sortBy(SortDirection.NAME_Z_TO_A).getProducts();
+
+        Collections.sort(productsAsIs, Comparator.comparing(Products::getName).reversed());
+
+        Assert.assertEquals(productsAsIs, productsAfterSorting);
+    }
 }
+
+

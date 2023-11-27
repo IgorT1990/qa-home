@@ -6,14 +6,27 @@ import org.openqa.selenium.support.FindBy;
 
 public class MainPage extends BasePage {
 
-    @FindBy(xpath ="//*[@id='content']/div/h4")
-    private WebElement successfulMessage;
+////  @FindBy(xpath ="//*[@id='content']/div/h4")
+//    private WebElement successfulMessage;
+//
+//    public String getSuccessfulMessage(){
+//        return successfulMessage.getText();
+//    }
+//
+//    public MainPage (){
+//        super();
+//    }
 
-    public String getSuccessfulMessage(){
-        return successfulMessage.getText();
-    }
+    @FindBy(id = "flash")
+    private WebElement successfulMessage;
 
     public MainPage (){
         super();
     }
+
+    public String getSuccessMessageText(){
+        return successfulMessage.getText();
+    }
+
+
 }

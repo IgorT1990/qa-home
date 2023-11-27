@@ -10,62 +10,55 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(id="username")
+    @FindBy(id = "username")
     private WebElement userInput;
 
-    @FindBy(id="password")
+    @FindBy(css ="#password")
     private WebElement passwordInput;
 
-    @FindBy(xpath = "//*[@id=\"login\"]/button/i")
+    @FindBy(xpath = "//i[@class='fa fa-2x fa-sign-in']")
     private WebElement loginButton;
 
-    @FindBy(id="flash")
+    @FindBy(id = "flash")
     private WebElement errorMessage;
 
-    public LoginPage(){
+    public LoginPage() {
         super();
     }
 
-    private LoginPage setUserName(String userName){
+    private LoginPage setUserName(String userName) {
         return enterValueToWebElement(userInput, userName);
-//        userInput.clear();
-//        userInput.sendKeys(userName);
-//        return this;
     }
 
-    private LoginPage setUserPassword(String userPassword){
-         return enterValueToWebElement(passwordInput, userPassword);
-//        passwordInput.clear();
-//        passwordInput.sendKeys(userPassword);
-//        return this;
+    private LoginPage setUserPassword(String userPassword) {
+        return enterValueToWebElement(passwordInput, userPassword);
     }
 
-    private LoginPage enterValueToWebElement(WebElement element, String value){
+    private LoginPage enterValueToWebElement(WebElement element, String value) {
         element.clear();
         element.sendKeys(value);
         return this;
     }
 
-    private void clickLoginButton (){
+    private void clickLoginButton() {
         loginButton.click();
     }
 
-    public MainPage login(String userName, String userPassword){
+    public MainPage login(String userName, String userPassword) {
         setUserName(userName)
                 .setUserPassword(userPassword)
                 .clickLoginButton();
         return new MainPage();
     }
 
-    public LoginPage unsuccessfulLogin(String userName, String userPassword){
+    public LoginPage unsuccessfulLogin(String userName, String userPassword) {
         setUserName(userName)
-                .setUserPassword(userPassword)
+                .setUserPassword(userPassword + "1")
                 .clickLoginButton();
         return new LoginPage();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessageText() {
         return errorMessage.getText();
     }
-
 }
