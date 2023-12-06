@@ -1,11 +1,14 @@
-package homework.rest_api;
+package homework.rest_api.endpoints;
 
 import com.google.gson.Gson;
+import homework.rest_api.config.Config;
 import homework.rest_api.model.User;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+
+import java.util.Random;
 
 public class UserEndPoints {
 
@@ -27,6 +30,9 @@ public class UserEndPoints {
     }
 
     public Response getUser (String username){
+        if (username == null) {
+            throw new IllegalArgumentException("Username cannot be null");
+        }
         return given()
                 .pathParam("username", username)
                 .when()
@@ -49,4 +55,6 @@ public class UserEndPoints {
                 .delete(Config.DELETE_USER, username)
                 .then().extract().response();
     }
+
+
 }

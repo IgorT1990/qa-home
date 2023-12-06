@@ -1,4 +1,4 @@
-package homework.rest_api;
+package homework.rest_api.config;
 
 public class Config {
     public static final String USER_BASE_URL = "https://petstore.swagger.io/v2";

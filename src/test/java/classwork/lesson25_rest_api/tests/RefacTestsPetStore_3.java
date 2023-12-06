@@ -1,17 +1,23 @@
-package classwork.lesson25_rest_api;
+package classwork.lesson25_rest_api.tests;
 
+import classwork.lesson25_rest_api.config.Config;
+import io.restassured.RestAssured;
+import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class RefacTestsPetStore {
+public class RefacTestsPetStore_3 {
+    public RequestSpecification given(){
+        return RestAssured.given()
+                .log().uri()
+                .baseUri(Config.PETSTORE_BASE_URL);
+    }
 
     @Test
     public void verifyStatusCode(){
         given()
-                .log().uri()
-                .baseUri(Config.PETSTORE_BASE_URL)
                 .queryParam("status", "available")
                 .when()
                 .get(Config.PET_BY_STATUS)
@@ -22,8 +28,6 @@ public class RefacTestsPetStore {
     @Test
     public void verifyBody(){
         given()
-                .log().uri()
-                .baseUri(Config.PETSTORE_BASE_URL)
                 .queryParam("status", "sold")
                 .when()
                 .get(Config.PET_BY_STATUS)
@@ -36,8 +40,6 @@ public class RefacTestsPetStore {
     @Test
     public void verifyExistingPetReturn200(){
         given()
-                .log().uri()
-                .baseUri(Config.PETSTORE_BASE_URL)
                 .pathParam("petId", "1")
                 .when()
                 .get(Config.PET_BY_ID)
@@ -49,8 +51,6 @@ public class RefacTestsPetStore {
     @Test
     public void nonExistingPetReturn404(){
         given()
-                .log().uri()
-                .baseUri(Config.PETSTORE_BASE_URL)
                 .pathParam("petId", "123123123123123")
                 .when()
                 .get(Config.PET_BY_ID)
@@ -58,6 +58,4 @@ public class RefacTestsPetStore {
                 .log().body()
                 .statusCode(404);
     }
-
-
 }

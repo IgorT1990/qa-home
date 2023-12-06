@@ -1,5 +1,6 @@
-package homework.rest_api;
+package homework.rest_api.tests;
 
+import homework.rest_api.endpoints.UserEndPoints;
 import homework.rest_api.model.User;
 import io.restassured.response.Response;
 import org.hamcrest.Matchers;

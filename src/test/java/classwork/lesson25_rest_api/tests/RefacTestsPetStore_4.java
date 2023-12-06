@@ -1,5 +1,6 @@
-package classwork.lesson25_rest_api;
+package classwork.lesson25_rest_api.tests;
 
+import classwork.lesson25_rest_api.endpoints.PetStorePetEndPoint;
 import org.hamcrest.Matchers;
 import org.testng.annotations.Test;
 

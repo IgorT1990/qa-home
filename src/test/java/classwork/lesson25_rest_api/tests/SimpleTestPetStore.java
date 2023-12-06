@@ -1,4 +1,4 @@
-package classwork.lesson25_rest_api;
+package classwork.lesson25_rest_api.tests;
 
 import io.restassured.response.Response;
 import org.codehaus.groovy.transform.tailrec.TernaryToIfStatementConverter;

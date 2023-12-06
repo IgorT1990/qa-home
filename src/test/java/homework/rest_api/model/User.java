@@ -1,7 +1,10 @@
 package homework.rest_api.model;
 
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Objects;
+import java.util.Random;
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
     private long id;
     private String username;
@@ -90,5 +93,21 @@ public class User {
     @Override
     public int hashCode() {
         return Objects.hash(id, username, firstName, lastName, email, password, phone, status);
+    }
+
+
+    public static User createNewUser(){
+        Random random = new Random();
+        long randomId = random.nextLong(100) + 1;
+        User user = new User();
+        user.setId(randomId);
+        user.setUsername("Test");
+        user.setFirstName("Tester");
+        user.setLastName("Testovui");
+        user.setEmail("tet@tet.com");
+        user.setPassword("90102030");
+        user.setPhone("3898090089");
+        user.setStatus(0);
+        return user;
     }
 }

@@ -1,6 +1,5 @@
 package classwork.lesson25_rest_api.models;
 
-import org.junit.jupiter.api.Tag;
 
 import java.util.List;
 
@@ -67,6 +66,7 @@ public class Pet {
 
         Pet pet = new Pet();
         pet.setName(name);
+        //pet.setPhotoUrls(ImmutableList.of("someUrl"));
         pet.setCategory(category);
         pet.setStatus("available");
         return pet;

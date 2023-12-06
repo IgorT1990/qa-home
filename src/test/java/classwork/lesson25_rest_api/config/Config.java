@@ -1,4 +1,4 @@
-package classwork.lesson25_rest_api;
+package classwork.lesson25_rest_api.config;
 
 public class Config {
     public static final String PETSTORE_BASE_URL = "https://petstore.swagger.io/v2";

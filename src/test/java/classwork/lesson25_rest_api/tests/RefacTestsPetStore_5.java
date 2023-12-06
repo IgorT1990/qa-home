@@ -1,13 +1,15 @@
-package classwork.lesson25_rest_api;
+package classwork.lesson25_rest_api.tests;
 
+import classwork.lesson25_rest_api.endpoints.PetStorePetEndPoint;
 import classwork.lesson25_rest_api.models.Category;
 import classwork.lesson25_rest_api.models.Pet;
 import io.restassured.response.Response;
-import org.assertj.core.api.SoftAssertions;
 import org.hamcrest.Matchers;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
+
+import java.util.List;
 
 
 public class RefacTestsPetStore_5 {
@@ -64,14 +66,36 @@ public class RefacTestsPetStore_5 {
                 .createPet(cat);
 
         Pet petFromService = petResponse.body().as(Pet.class);
-//        Assert.assertNotNull(petFromService);
-//        Assert.assertNotNull(petFromService.getId());
+        Assert.assertNotNull(petFromService);
+        Assert.assertNotNull(petFromService.getId());
 
-        SoftAssertions assertions = new SoftAssertions();
-        assertions.assertThat(petFromService.getName()).as("Name").isEqualTo("Markus");
-        assertions.assertThat(petFromService.getStatus()).as("Status").isEqualTo("available");
-        assertions.assertAll();
+        long idFromService = petFromService.getId();
+
+        new PetStorePetEndPoint()
+                .getPetById(String.valueOf(idFromService))
+                .then()
+                .log().body()
+                .statusCode(200);
+
+//        SoftAssertions assertions = new SoftAssertions();
+//        assertions.assertThat(petFromService.getName()).as("Name").isEqualTo("Markus");
+//        assertions.assertThat(petFromService.getStatus()).as("Status").isEqualTo("available");
+//        assertions.assertAll();
     }
+
+    @BeforeClass
+    public static void cleanUp(){
+        List<Pet> petList = new PetStorePetEndPoint()
+                .getPetByStatus("available")
+                .body()
+                .jsonPath().getList("$", Pet.class);
+
+        List<Pet> petList2 = new PetStorePetEndPoint()
+                .getPetByStatus("available")
+                .body()
+                .jsonPath().getList("findAll {item -> item.name == 'Markus'}", Pet.class);
+    }
+
 }
 
 

@@ -1,5 +1,6 @@
-package classwork.lesson25_rest_api;
+package classwork.lesson25_rest_api.endpoints;
 
+import classwork.lesson25_rest_api.config.Config;
 import classwork.lesson25_rest_api.models.Pet;
 import com.google.gson.Gson;
 import io.restassured.RestAssured;
@@ -19,12 +20,18 @@ public class PetStorePetEndPoint {
     }
 
 
-
     public Response getPetById(String id) {
         return given()
                 .pathParam("petId", id)
                 .when()
                 .get(Config.PET_BY_ID)
+                .then().extract().response();
+    }
+
+    public Response deleteById(long id) {
+        return given()
+                .when()
+                .delete(Config.PET_BY_ID, id)
                 .then().extract().response();
     }
 
@@ -36,7 +43,7 @@ public class PetStorePetEndPoint {
                 .then().extract().response();
     }
 
-    public Response createPet(Pet pet){
+    public Response createPet(Pet pet) {
         String petJson = new Gson().toJson(pet);
         return given()
                 .body(petJson)
@@ -46,6 +53,13 @@ public class PetStorePetEndPoint {
 
     }
 
+    public Response updatePet(Pet pet) {
+        return given()
+                .body(pet)
+                .when()
+                .put(Config.CREATE_PET)
+                .then().extract().response();
 
 
+    }
 }
