@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>qa-testng</artifactId>
+    <artifactId>qa-home</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -24,10 +24,23 @@
         <google-guava.version>30.1-jre</google-guava.version>
         <jackson-core.version>2.12.2</jackson-core.version>
         <jackson-databind.version>2.12.2</jackson-databind.version>
+        <logback.version>1.4.11</logback.version>
+        <allure.version>2.13.9</allure.version>
+        <allure-maven.version>2.10.0</allure-maven.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <cucmber-java.version>7.14.0</cucmber-java.version>
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -35,15 +48,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.github.javafaker/javafaker -->
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
@@ -71,7 +81,7 @@
             <version>${jsoup.version}</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/rest-assured -->
+
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
@@ -79,22 +89,20 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>junit</groupId>-->
+<!--            <artifactId>junit</artifactId>-->
+<!--            <version>${junit.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 
-        <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${google-guava.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.google.guava</groupId>-->
+<!--            <artifactId>guava</artifactId>-->
+<!--            <version>${google-guava.version}</version>-->
+<!--        </dependency>-->
 
 
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -120,6 +128,14 @@
             <version>${jackson-databind.version}</version>
         </dependency>
 
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -127,29 +143,95 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <!-- ALL FOR CUCUMBER -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-bom</artifactId>
+            <version>7.14.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>5.10.1</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
 
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>7.14.0</version>
+        </dependency>
 
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit-platform-engine</artifactId>
+            <version>7.14.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-suite</artifactId>
+            <version>1.10.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>4.12.0</version>
+            <scope>test</scope>
+        </dependency>
 
 
     </dependencies>
 
+
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>${allure-maven.version}</version>
+                <configuration>
+                    <reportVersion>${allure.version}</reportVersion>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${surefire.version}</version>
                 <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>testng/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <systemPropertyVariables>
+                        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+                        <logging>true</logging>
+                        <env>test</env>
+                    </systemPropertyVariables>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
-
     </build>
 
 </project>

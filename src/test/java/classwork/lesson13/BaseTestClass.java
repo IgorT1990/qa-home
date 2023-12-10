@@ -17,6 +17,7 @@ public class BaseTestClass {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        driver.get("https://the-internet.herokuapp.com/login");
 
     }
 

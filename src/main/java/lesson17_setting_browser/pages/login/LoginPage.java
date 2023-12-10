@@ -2,13 +2,14 @@ package lesson17_setting_browser.pages.login;
 
 import lesson17_setting_browser.pages.BasePage;
 import lesson17_setting_browser.pages.main.MainPage;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class LoginPage extends BasePage {
+    private final static Logger LOGGER = LoggerFactory.getLogger(LoginPage.class);
 
     @FindBy(id = "username")
     private WebElement userInput;
@@ -45,9 +46,11 @@ public class LoginPage extends BasePage {
     }
 
     public MainPage login(String userName, String userPassword) {
+        LOGGER.info("start check login");
         setUserName(userName)
                 .setUserPassword(userPassword)
                 .clickLoginButton();
+        LOGGER.info("finish check login");
         return new MainPage();
     }
 

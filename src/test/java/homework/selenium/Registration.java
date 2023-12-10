@@ -1,5 +1,6 @@
 package homework.selenium;
 
+import lesson17_setting_browser.driver.WebDriverHolder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,38 +14,25 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Registration {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class Registration  extends  Base{
     private static final String EMAIL = "tester.testovui+6@gmail.com";
     private static final String INVALIDEMAIL = "test@test.com";
+    private WebDriverWait wait;
+    private Duration timeout;
 
-    @BeforeMethod
-    public void Start() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("http://prestashop.qatestlab.com.ua/en/authentication?back=my-account#account-creation");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-    }
-
-    @AfterMethod
-    public void Stop() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
 
     @Test
-    public void CreateAccount() {
-        WebElement email = driver.findElement(By.xpath("//*[@id=\"email_create\"]"));
-        WebElement createButton = driver.findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span"));
+    public void CreateAccount() throws InterruptedException {
+        WebElement email = WebDriverHolder.getInstance().getDriver().findElement(By.xpath("//*[@id=\"email_create\"]"));
+        WebElement createButton = WebDriverHolder.getInstance().getDriver().findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span"));
 
         email.click();
         email.clear();
         email.sendKeys(EMAIL);
         createButton.click();
 
+        timeout = Duration.ofSeconds(2);
+        wait = new WebDriverWait(WebDriverHolder.getInstance().getDriver(), timeout);
         WebElement successPage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"noSlide\"]/h1")));
         Assert.assertEquals(successPage.getText(), "AUTHENTICATION");
 
@@ -52,8 +40,8 @@ public class Registration {
 
     @Test
     public void invalidEmail(){
-        WebElement email = driver.findElement(By.xpath("//*[@id=\"email_create\"]"));
-        WebElement createButton = driver.findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span"));
+        WebElement email = WebDriverHolder.getInstance().getDriver().findElement(By.xpath("//*[@id=\"email_create\"]"));
+        WebElement createButton = WebDriverHolder.getInstance().getDriver().findElement(By.xpath("//*[@id=\"SubmitCreate\"]/span"));
 
         email.click();
         email.clear();
